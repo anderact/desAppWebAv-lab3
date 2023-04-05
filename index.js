@@ -2,24 +2,32 @@ const express = require('express')
 const port = 3500
 const app = express()
 
-app.get('/products', (req, res) => {
-    res.send('lista de productos')
+app.get('/', (req, res)=> {
+    res.send('Hello World')
 })
 
-app.post('/products', (req, res) => {
-    res.send('creando productos')
+app.get('/myfile', (req, res)=> {
+    res.sendFile('express-logo.jpg', {
+        root: __dirname
+    })
 })
 
-app.put('/products', (req, res) => {
-    res.send('actualizando producto')
+app.get('/user', (req, res) => {
+    res.json({
+        nombre: "Axel",
+        apellido: "Chacon",
+        edad: 19,
+        points: [1, 2 ,3],
+        adress: {
+            ciudad: "Lima - Peru",
+            distrito: "San Juan de Lurigancho",
+            calle: "Las Flores"
+        }
+    })
 })
 
-app.delete('/products', (req, res) => {
-    res.send('eliminando producto')
-})
-
-app.patch('/products', (req, res) => {
-    res.send('actualizando una parte del producto')
+app.get('/isAlive', (req, res) => {
+    res.sendStatus(200)
 })
 
 app.listen(port)
